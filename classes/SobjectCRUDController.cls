@@ -1,11 +1,11 @@
 public with sharing class SobjectCRUDController {
     
-    @AuraEnabled 
+    @AuraEnabled(cacheable=true)
     public static Map<String, String> getSObjectsTypes(){
         return SchemaHelperController.getSObjectsTypes();
     }
 
-    @AuraEnabled 
+    @AuraEnabled(cacheable=true)
     public static List<SObject> getRecords(String sObjName, String fields){
         return Database.query('SELECT '+ fields + ' FROM '+ sObjName);
     }

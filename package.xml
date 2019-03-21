@@ -37,6 +37,8 @@
   <types>
     <name>AuraDefinitionBundle</name>
     <members>CustonListViewComponent</members>
+    <members>PaginationComponent</members>
+    <members>PaginationEvent</members>
   </types>
   <types>
     <name>AutoResponseRules</name>
