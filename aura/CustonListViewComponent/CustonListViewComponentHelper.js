@@ -50,7 +50,6 @@
 
     setDataTableRecords : function(component, sObjName, fields) {
         var action= component.get("c.getRecords");
-        action.setStorable();
         let tableFields = fields[0].value;
         for(let i = 1; i < fields.length; i++){
             tableFields += ',' + fields[i].value;
@@ -62,6 +61,7 @@
         action.setCallback(this,function(response){
             var state= response.getState();
             if(state === "SUCCESS"){
+                console.log(response.getReturnValue());
                 component.set('v.allData',response.getReturnValue());
             } 
         });

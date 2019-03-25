@@ -1,16 +1,15 @@
 ({
-    getTableData : function(component, helper) {
-        var data = component.get("v.allData");
+    getTableData : function(component, helper, data) {
         component.set("v.totalPages", Math.ceil(data.length/component.get("v.pageSize")));
         component.set("v.currentPageNumber",1);
-        helper.buildData(component, helper);
+        helper.buildData(component, helper, data);
     },
     
-    buildData : function(component, helper) {
+    buildData : function(component, helper, data) {
         var tableData = [];
         var pageNumber = component.get("v.currentPageNumber");
         var pageSize = component.get("v.pageSize");
-        var allData = component.get("v.allData");
+        var allData = data;
         var x = (pageNumber-1)*pageSize;
         for(; x< (pageNumber)*pageSize; x++){
             if(allData[x]){
@@ -18,6 +17,7 @@
             }
         }
         component.set('v.tableData', tableData);
+        console.log(tableData);
         helper.generatePageList(component, pageNumber);
     },
     
