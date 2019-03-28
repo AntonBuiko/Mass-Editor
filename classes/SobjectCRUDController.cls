@@ -1,9 +1,4 @@
 public with sharing class SobjectCRUDController {
-    
-    @AuraEnabled(cacheable=true)
-    public static Map<String, String> getSObjectsTypes(){
-        return SchemaHelperController.getSObjectsTypes();
-    }
 
     @AuraEnabled
     public static List<SObject> getRecords(String sObjName, String fields){

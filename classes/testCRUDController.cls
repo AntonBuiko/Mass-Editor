@@ -2,7 +2,7 @@
 public class testCRUDController {
     @isTest
     static void testGetSObjectsTypes(){
-        Map<String, String> mapp = SobjectCRUDController.getSObjectsTypes();
+        Map<String, String> mapp = SchemaHelperController.getSObjectsTypes();
         System.debug(mapp.keySet());
         System.assert(mapp.keySet().contains('Account'));
     }

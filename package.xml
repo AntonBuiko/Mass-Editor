@@ -36,8 +36,12 @@
   </types>
   <types>
     <name>AuraDefinitionBundle</name>
+    <members>CreationRecordsComponent</members>
     <members>CustonListViewComponent</members>
+    <members>MassActionsButtonComponent</members>
     <members>PaginationComponent</members>
+    <members>SelectionFieldsComponent</members>
+    <members>massActionEvent</members>
   </types>
   <types>
     <name>AutoResponseRules</name>

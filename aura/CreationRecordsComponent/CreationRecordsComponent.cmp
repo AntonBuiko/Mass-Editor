@@ -1,0 +1,12 @@
+<aura:component>
+    <aura:attribute name="fieldSelected" type="List"/>
+    <aura:attribute name="countForms" type="Integer" default="1"/>
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }"/>
+    <lightning:layout>
+        <lightning:layoutItem size="1">
+            <lightning:recordForm
+            objectApiName="Account"
+            fields="{!v.fieldSelected}"/>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>	

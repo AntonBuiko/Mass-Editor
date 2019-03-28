@@ -4,6 +4,7 @@ public with sharing class SchemaHelperController {
     public static String[] avalabelObjects = getAvalableObjects();
     public static Map<String, String> mapObjectsAndFields = new Map<String, String>();
     
+    @AuraEnabled
     public static Map<String, String> getSObjectsTypes(){ 
         for (Schema.SObjectType obj : mapObjects.values()) {
             DescribeSObjectResult description = obj.getDescribe();
@@ -15,7 +16,7 @@ public with sharing class SchemaHelperController {
                 && description.isSearchable()
                 && getAvalableObjects().contains(description.getName()))
                 || description.isCustom()){
-                mapObjectsAndFields.put(description.getName(), fetchFieldJson(description));
+                mapObjectsAndFields.put(description.getName(), fetchJsonDescribeField(description));
                 // List<Schema.ChildRelationship> listChilds = description.getChildRelationships();
                 // for(Schema.ChildRelationship child : listChilds){
                 // if (!child.isRestrictedDelete() && child.isCascadeDelete()) {  
@@ -27,24 +28,39 @@ public with sharing class SchemaHelperController {
         return mapObjectsAndFields;
     }
 
-    public static String fetchFieldJson(Schema.DescribeSObjectResult describeSobj){
+    public static String fetchJsonDescribeField(Schema.DescribeSObjectResult describeSobj){
         List<String> listMetadataObj = new List<String>();
         Map <String, Schema.SObjectField> fieldMap = describeSobj.fields.getMap();
-        String result = '';
+        String nillibleFields = '';
+        String requiredFields = '';
         for (SObjectField field : fieldMap.values()) {
             Schema.DescribeFieldResult describeField = field.getDescribe();
-            if (describeField.isAccessible()){  
-                    if(result != ''){
-                        result += ',';
-                    }
+            if ((describeField.isAccessible()
+                && !describeField.isRestrictedDelete()
+                && describeField.isSortable()
+                && describeField.isUpdateable())
+                || describeField.isIdLookup()){  
                     String jsonPart = '{';
                     jsonPart += '"label":"' + describeField.getLabel() + '",';
                     jsonPart += '"value":"' + describeField.getName() + '"';
                     jsonPart += '}';
-                    result += jsonPart;
+                    if (describeField.isNillable()) {
+                        if(nillibleFields != ''){
+                            nillibleFields += ',';
+                        }               
+                       nillibleFields += jsonPart;
+                    }
+                    else {
+                        if(requiredFields != ''){
+                            requiredFields += ',';
+                        }
+                        requiredFields += jsonPart;
+                    }
             }
         }
-        return '['+result+']';
+        System.debug(requiredFields);
+        System.debug(nillibleFields);
+        return '['+ requiredFields + ',' + nillibleFields+']';
     }
 
     public static String[] getAvalableObjects(){

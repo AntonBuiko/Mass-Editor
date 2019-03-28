@@ -1,0 +1,33 @@
+<aura:component controller="SobjectCRUDController">
+    <aura:attribute name="selectedRows" type="List"/>
+    <aura:registerEvent name="massActionEvent" type="c:massActionEvent"/>
+
+    <lightning:layoutItem padding="around-small">
+        <lightning:buttonIcon name="edit" onclick="{!c.handleClickButton}"
+        iconName="utility:edit"  size="large"  variant="border-filled" alternativeText="Mass edit" />
+    </lightning:layoutItem>
+    <lightning:layoutItem padding="around-small">
+        <lightning:buttonIcon name="create" onclick="{!c.handleClickButton}"
+         iconName="utility:record_create" size="large"  variant="border-filled" alternativeText="Mass create" />
+    </lightning:layoutItem>
+    <lightning:layoutItem padding="around-small">
+        <lightning:buttonIcon name="delete" onclick="{!c.handleClickButton}" 
+        iconName="utility:delete" size="large"  variant="border-filled" alternativeText="Mass delete" />
+    </lightning:layoutItem>
+    <lightning:layoutItem padding="around-small">
+        <lightning:buttonIcon name="clone" onclick="{!c.handleClickButton}"
+        iconName="utility:relate" size="large"  variant="border-filled" alternativeText="Mass clone" />
+    </lightning:layoutItem>
+    <lightning:layoutItem padding="around-small">
+        <lightning:buttonIcon name="import" onclick="{!c.handleClickButton}"
+         iconName="utility:arrowdown" size="large"  variant="border-filled" alternativeText="Import" />
+    </lightning:layoutItem>
+    <lightning:layoutItem padding="around-small">
+        <lightning:buttonIcon name="export" onclick="{!c.handleClickButton}"
+        iconName="utility:arrowup" size="large"  variant="border-filled" alternativeText="Export" />
+    </lightning:layoutItem>
+    <lightning:layoutItem padding="around-small">
+        <lightning:buttonIcon name="pdf" onclick="{!c.handleClickButton}"
+        iconName="utility:file" size="large"  variant="border-filled" alternativeText="Save to pdf" />
+    </lightning:layoutItem>
+</aura:component>	

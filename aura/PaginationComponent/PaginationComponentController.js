@@ -1,8 +1,6 @@
 ({
     onDataAttrChange : function(component, event, helper) {
-            console.log(event.getParam("oldValue"));
-            console.log(event.getParam("value"));
-            helper.getTableData(component, helper, event.getParam("value"));
+        helper.getTableData(component, helper);
     },
     
     onNext : function(component, event, helper) {        
